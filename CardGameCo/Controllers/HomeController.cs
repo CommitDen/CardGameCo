@@ -15,7 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        return View(new TimeSpan(0, 0, 10));
     }
 
     public IActionResult Privacy()
