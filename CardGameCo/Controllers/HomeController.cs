@@ -21,6 +21,7 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View();
+        return 1;
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
