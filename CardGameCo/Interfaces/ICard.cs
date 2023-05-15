@@ -4,7 +4,6 @@ namespace CardGameCo.Interfaces
     public interface ICard
     {
         string German { get; set; }
-        int Indexex();
+        string Hungarian { get; set; }
     }
 }
-
