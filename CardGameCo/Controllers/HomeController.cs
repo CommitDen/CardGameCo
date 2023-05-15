@@ -2,51 +2,48 @@
 using Microsoft.AspNetCore.Mvc;
 using CardGameCo.Models;
 using CardGameCo.Interfaces;
+using CardGameCo.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace CardGameCo.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
     {
         _logger = logger;
+        _db = db;
     }
 
     public IActionResult Index()
     {
-        return View(new TimeSpan(0, 0, 10));
+        return View();
     }
 
-    public IActionResult Privacy()
+    [HttpPost]
+    public IActionResult Login(User user)
     {
+        User sessionUser = _db.Users.Single(x => x.Email == user.Email);
 
-        List<ICard> cards = //Cards list with other type of classes implementing the same interface
-        for (int i = 0; i < 2; i++)
-        {
-            cards[i].German = "h";
-        }
-        return RedirectToAction("Index",nameof(HomeController));
-    }
+        if (sessionUser is null)
+            throw new Exception("Wrong Email!");
 
+        if (sessionUser.Password != user.Password)
+            throw new Exception("Wrong Password!");
 
-    [HttpGet]
-    public IActionResult Edit(/*int Id*/)
-    {
-        //get data from database fill model and return it to view
-        return View(/*model*/);
+        HttpContext.Session.SetString("Email", sessionUser.Email);
+        HttpContext.Session.SetString("UserName", sessionUser.Name);
 
+        return View("Main");
     }
 
     [HttpPost]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error(/*stealth model*/)
+    public IActionResult Error()
     {
-        // Check how this shit works
-        //dbcontext.Save(model);
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
-
-// asd https://localhost:7016/Home/Privacy
