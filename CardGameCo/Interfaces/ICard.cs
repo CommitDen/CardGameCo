@@ -3,7 +3,9 @@ namespace CardGameCo.Interfaces
 {
     public interface ICard
     {
-        string German { get; set; }
-        string Hungarian { get; set; }
+        string Language1 { get; set; }
+        string Language2 { get; set; }
+        string Text1 { get; set; }
+        string Text2 { get; set; }
     }
 }
