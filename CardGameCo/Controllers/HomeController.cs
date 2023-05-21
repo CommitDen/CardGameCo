@@ -26,7 +26,7 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Login(User user)
     {
-        User sessionUser = _db.Users.Single(x => x.Email == user.Email);
+        User sessionUser = _db.AspNetUsers.Single(x => x.Email == user.Email);
 
         if (sessionUser is null)
             throw new Exception("Wrong Email!");
@@ -35,9 +35,32 @@ public class HomeController : Controller
             throw new Exception("Wrong Password!");
 
         HttpContext.Session.SetString("Email", sessionUser.Email);
-        HttpContext.Session.SetString("UserName", sessionUser.Name);
+        HttpContext.Session.SetString("UserName", sessionUser.UserName);
 
         return View("Main");
+    }
+
+    [HttpGet]
+    public IActionResult SignUp()
+    {
+        User user = new User();
+
+        return View(user);
+    }
+
+    [HttpPost]
+    public IActionResult SignUp(User user)
+    {
+        if (!ModelState.IsValid)
+        {
+            // Model validation failed, return the view with error messages
+            return View(user);
+        }
+
+        _db.AspNetUsers.Add(user);
+        _db.SaveChanges();
+
+        return RedirectToAction("Index", nameof(HomeController));
     }
 
     [HttpPost]
