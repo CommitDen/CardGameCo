@@ -5,6 +5,7 @@ using CardGameCo.Interfaces;
 
 namespace CardGameCo.Models
 {
+    [Table("WordCards")]
 	public class WordCard : ICard
 	{
         public WordCard(string language1, string language2, string word1, string word2)
