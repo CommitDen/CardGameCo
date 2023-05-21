@@ -12,5 +12,6 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<WordCard>? WordCards { get; set; }
+    public DbSet<User>? AspNetUsers { get; set; }
 }
 
