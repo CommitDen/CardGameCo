@@ -10,7 +10,7 @@
         <h1>CardGameCo</h1>
     </div>
     <div class="row">
-        @using (Html.BeginForm("Login", nameof(HomeController), FormMethod.Post))
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
             <div>
                 @Html.LabelFor(m => m.Email, new { @class = "col-4" })
@@ -25,5 +25,10 @@
             <input class="mt-5" type="submit" value="Submit" />
         }
 
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @Html.ActionLink("Sign Up", "SignUp", "Home", new { }, new { @class = "btn btn-primary" })
+        </div>
     </div>
 </div>
