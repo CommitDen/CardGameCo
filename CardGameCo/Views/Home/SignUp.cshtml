@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using CardGameCo.Controllers
+
+@model User
+
+<div class="col-12">
+    <div class="row">
+        <h1>Sign Up</h1>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
+        {
+            <div>
+                @Html.LabelFor(m => m.UserName, new { @class = "col-4" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "col-8" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Email, new { @class = "col-4" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "col-8" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.EmailVerify, new { @class = "col-4" })
+                @Html.TextBoxFor(m => m.EmailVerify, new { @class = "col-8" })
+                @Html.ValidationMessageFor(m => m.EmailVerify)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Password, new { @class = "col-4" })
+                @Html.TextBoxFor(m => m.Password, new { @class = "col-8" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.PasswordVerify, new { @class = "col-4" })
+                @Html.TextBoxFor(m => m.PasswordVerify, new { @class = "col-8" })
+                @Html.ValidationMessageFor(m => m.PasswordVerify)
+            </div>
+
+            <input class="mt-5" type="submit" value="Submit" />
+        }
+
+    </div>
+
+</div>
+
