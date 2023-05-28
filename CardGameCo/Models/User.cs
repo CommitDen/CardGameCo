@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CardGameCo.Models
 {
     [Table("AspNetUsers")]
-	public class User
+	public class User : IdentityUser
 	{
         public User()
         {
@@ -16,28 +18,23 @@ namespace CardGameCo.Models
             Id = id;
             UserName = name;
             Email = email;
-            Password = password;
+            PasswordHash = password; //Hashing.SHA256(Cleared(pass));
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Compare("Id")]
-        public string Id { get; set; }
 
         [Required]
         [StringLength(50,MinimumLength = 10, ErrorMessage ="Username must be atleast 10 characters long!")]
-        public string UserName { get; set; }
+        public override string UserName { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$",
-            ErrorMessage = "Please enter a valid email address.")]
-        public string Email { get; set; }
+        [EmailAddress]
+        public override string Email { get; set; }
 
-        public bool EmailConfirmed { get; set; } = false;
+        public override bool EmailConfirmed { get; set; } = false;
 
         [Required]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}\[\]:"";'<>?,./])[A-Za-z\d~!@#$%^&*()_+`\-={}\[\]:"";'<>?,./]{8,}$",
             ErrorMessage = "The password must be at least 8 characters long and contain at least one letter, one digit, and one special character.")]
+        [NotMapped]
         public string Password { get; set; }
 
         [Required]

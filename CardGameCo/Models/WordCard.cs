@@ -19,9 +19,13 @@ namespace CardGameCo.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
+
         public string Language1 { get; set; }
+
         public string Language2 { get; set; }
+
         public string Word1 { get; set; }
+
         public string Word2 { get; set; }
 
 
