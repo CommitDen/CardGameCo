@@ -31,7 +31,7 @@ public class HomeController : Controller
         if (sessionUser is null)
             throw new Exception("Wrong Email!");
 
-        if (sessionUser.Password != user.Password)
+        if (sessionUser.PasswordHash != user.PasswordHash)
             throw new Exception("Wrong Password!");
 
         HttpContext.Session.SetString("Email", sessionUser.Email);
@@ -57,10 +57,19 @@ public class HomeController : Controller
             return View(user);
         }
 
+        if (_db.AspNetUsers.Select(x=>x.Email == user.Email) != null)
+        {
+            // Add a specific validation error message for a property
+            ModelState.AddModelError("Email", "There is already an account associated with this email adress!");
+
+            // Return the view with validation errors
+            return View(user);
+        }
+
         _db.AspNetUsers.Add(user);
         _db.SaveChanges();
 
-        return RedirectToAction("Index", nameof(HomeController));
+        return RedirectToAction("Index", "Home");
     }
 
     [HttpPost]
