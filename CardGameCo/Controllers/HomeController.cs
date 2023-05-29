@@ -26,7 +26,7 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Login(User user)
     {
-        User sessionUser = _db.AspNetUsers.Single(x => x.Email == user.Email);
+        User? sessionUser = _db.AspNetUsers.Select(x => x).Where(x => x.Email == user.Email).FirstOrDefault();
 
         if (sessionUser is null)
             throw new Exception("Wrong Email!");
@@ -57,7 +57,9 @@ public class HomeController : Controller
             return View(user);
         }
 
-        if (_db.AspNetUsers.Select(x=>x.Email == user.Email) != null)
+        User? sessionUser = _db.AspNetUsers.Select(x => x).Where(x => x.Email == user.Email).FirstOrDefault();
+
+        if ( sessionUser != null)
         {
             // Add a specific validation error message for a property
             ModelState.AddModelError("Email", "There is already an account associated with this email adress!");

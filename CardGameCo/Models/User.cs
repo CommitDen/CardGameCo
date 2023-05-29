@@ -18,7 +18,8 @@ namespace CardGameCo.Models
             Id = id;
             UserName = name;
             Email = email;
-            PasswordHash = password; //Hashing.SHA256(Cleared(pass));
+            Password = password;
+            PasswordHash = Password; //Hashing.SHA256(Cleared(pass));
         }
 
         [Required]
@@ -35,7 +36,7 @@ namespace CardGameCo.Models
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}\[\]:"";'<>?,./])[A-Za-z\d~!@#$%^&*()_+`\-={}\[\]:"";'<>?,./]{8,}$",
             ErrorMessage = "The password must be at least 8 characters long and contain at least one letter, one digit, and one special character.")]
         [NotMapped]
-        public string Password { get; set; }
+        public string Password { get { return PasswordHash; } set { PasswordHash = value; } }
 
         [Required]
         [Compare("Email", ErrorMessage = "The email and email confirmation do not match.")]

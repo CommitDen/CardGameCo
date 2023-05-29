@@ -127,7 +127,7 @@ namespace CardGameCo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WordCards");
+                    b.ToTable("WordCards", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
