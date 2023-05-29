@@ -1,34 +1,40 @@
-﻿@using Microsoft.AspNetCore.Mvc
-@using Microsoft.AspNetCore.Mvc.Rendering
-@using Microsoft.AspNetCore.Mvc.ViewFeatures
-@using CardGameCo.Controllers
+﻿@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.AspNetCore.Mvc.ViewFeatures;
+@using CardGameCo.Controllers;
 
 @model User
 
-<div class="col-12">
-    <div class="row">
-        <h1>CardGameCo</h1>
-    </div>
-    <div class="row">
-        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-        {
-            <div>
-                @Html.LabelFor(m => m.Email, new { @class = "col-4" })
-                @Html.TextBoxFor(m => m.Email, new { @class = "col-8"})
-            </div>
-
-            <div>
-                @Html.LabelFor(m => m.Password, new { @class = "col-4" })
-                @Html.TextBoxFor(m => m.Password, new { @class = "col-8 passwordInput" })
-            </div>
-
-            <input class="mt-5" type="submit" value="Submit" />
-        }
-
-    </div>
-    <div class="row">
+<div class="container my-auto">
+    <div class="row h-100 align-items-center">
         <div class="col-12">
-            @Html.ActionLink("Sign Up", "SignUp", "Home", new { }, new { @class = "btn btn-primary" })
+            <div class="row text-center">
+                <h1 class="text-white mt-3">CardGameCo</h1>
+            </div>
+            <div class="text-white row mt-3">
+                <hr class="col-md-4 offset-md-4"/>
+            </div>
+            <div class="row">
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                {
+                    <div class="col-md-4 offset-md-4 mt-3">
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label text-white" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+                    </div>
+
+                    <div class="col-md-4 offset-md-4 mt-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label text-white" })
+                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control passwordInput" })
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="mt-5 btn-lg btn-primary col-md-3">Login</button>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <label class="text-white text-center mt-2">Not a member yet?</label>
+                @Html.ActionLink("Sign Up", "SignUp", "Home", new { }, new { @class = "text-center" })
+            </div>
         </div>
     </div>
 </div>

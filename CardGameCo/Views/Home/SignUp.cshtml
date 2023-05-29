@@ -1,50 +1,62 @@
 ﻿@using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Mvc.Rendering
 @using Microsoft.AspNetCore.Mvc.ViewFeatures
-@using CardGameCo.Controllers
+@using CardGameCo.Controllers;
 
 @model User
 
-<div class="col-12">
-    <div class="row">
+<div class="container">
+    <div class="row text-center">
         <h1>Sign Up</h1>
     </div>
     <div class="row">
         @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
         {
-            <div>
-                @Html.LabelFor(m => m.UserName, new { @class = "col-4" })
-                @Html.TextBoxFor(m => m.UserName, new { @class = "col-8" })
-                @Html.ValidationMessageFor(m => m.UserName)
+            <div class="mb-3">
+                @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                <span class="text-danger">
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </span>
             </div>
 
-            <div>
-                @Html.LabelFor(m => m.Email, new { @class = "col-4" })
-                @Html.TextBoxFor(m => m.Email, new { @class = "col-8" })
-                @Html.ValidationMessageFor(m => m.Email)
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                <span class="text-danger">
+                    @Html.ValidationMessageFor(m => m.Email)
+                </span>
             </div>
 
-            <div>
-                @Html.LabelFor(m => m.EmailVerify, new { @class = "col-4" })
-                @Html.TextBoxFor(m => m.EmailVerify, new { @class = "col-8" })
-                @Html.ValidationMessageFor(m => m.EmailVerify)
+            <div class="mb-3">
+                @Html.LabelFor(m => m.EmailVerify, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.EmailVerify, new { @class = "form-control" })
+                <span class="text-danger">
+                    @Html.ValidationMessageFor(m => m.EmailVerify)
+                </span>
             </div>
 
-            <div>
-                @Html.LabelFor(m => m.Password, new { @class = "col-4" })
-                @Html.TextBoxFor(m => m.Password, new { @class = "col-8 passwordInput" })
-                @Html.ValidationMessageFor(m => m.Password)
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control passwordInput" })
+                <span class="text-danger">
+                    @Html.ValidationMessageFor(m => m.Password)
+                </span>
             </div>
 
-            <div>
-                @Html.LabelFor(m => m.PasswordVerify, new { @class = "col-4" })
-                @Html.TextBoxFor(m => m.PasswordVerify, new { @class = "col-8 passwordInput" })
-                @Html.ValidationMessageFor(m => m.PasswordVerify)
+            <div class="mb-3">
+                @Html.LabelFor(m => m.PasswordVerify, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PasswordVerify, new { @class = "form-control col-md-6 passwordInput" })
+                <span class="text-danger">
+                    @Html.ValidationMessageFor(m => m.PasswordVerify)
+                </span>
             </div>
-
-            <input class="mt-5" type="submit" value="Submit" />
+            <div class="row">
+                @Html.ActionLink("Back", "Index", "Home", new { }, new { @class = "btn btn-danger col-md-3 text-decoration-none" })
+                <button type="submit" class="btn-lg btn-success col-md-3 offset-md-6">Sign up</button>
+            </div>
+            
         }
-
     </div>
 
 </div>
