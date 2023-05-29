@@ -1,5 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+$(document).ready(function () {
+    $('.passwordInput').on('input', function () {
+        var password = $(this).val();
+        var maskedPassword = '';
+        for (var i = 0; i < password.length; i++) {
+            maskedPassword += '*';
+        }
+        $(this).val(maskedPassword);
+    });
 
-// Write your JavaScript code.
-
+    $('.passwordInput').on('copy paste', function (e) {
+        e.preventDefault();
+    });
+});
